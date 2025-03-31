@@ -1,7 +1,7 @@
-package com.example.Todo.service;
+package com.example.Todo.entity;
 
-import com.example.Todo.entity.Todo;
 import com.example.Todo.repository.TodoRepository;
+import com.example.Todo.service.TodoService;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -23,7 +23,7 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public List<Todo> getTodosByDate(LocalDate date) {
-        return todoRepository.findByDate(date);
+        return todoRepository.findByTodoDate(date);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class TodoServiceImpl implements TodoService {
         return todoRepository.findById(id).map(todo -> {
             todo.setTitle(updatedTodo.getTitle());
             todo.setDescription(updatedTodo.getDescription());
-            todo.setDate(updatedTodo.getDate());
+            todo.setTodoDate(updatedTodo.getTodoDate());
             todo.setCompleted(updatedTodo.isCompleted());
             return todoRepository.save(todo);
         }).orElseThrow(() -> new EntityNotFoundException("Todo not found with id " + id));

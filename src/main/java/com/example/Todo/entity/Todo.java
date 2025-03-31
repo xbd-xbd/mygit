@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 public class Todo {
 
     @Id
@@ -22,6 +23,10 @@ public class Todo {
     private String title;
     private String description;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDate date;
+    private LocalDate todoDate;
     private boolean completed;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
